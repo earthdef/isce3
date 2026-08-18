@@ -288,6 +288,8 @@ def run(cfg: dict, input_hdf5: str, output_hdf5: str):
 
                     mask_array = open_raster(
                         snaphu_cfg['mask']) if snaphu_cfg['mask'] is not None else None
+                    if unwrap_args["preprocess_wrapped_phase"]["enabled"] and mask is not None:
+                        mask_array = (~mask).astype(np.uint8)
 
                     # Get effective number of looks
                     if snaphu_cfg['nlooks'] is not None:
@@ -333,6 +335,8 @@ def run(cfg: dict, input_hdf5: str, output_hdf5: str):
 
                     mask_array = open_raster(
                         cuphu_cfg['mask']) if cuphu_cfg['mask'] is not None else None
+                    if unwrap_args["preprocess_wrapped_phase"]["enabled"] and mask is not None:
+                        mask_array = (~mask).astype(np.uint8)
 
                     # Get effective number of looks
                     if cuphu_cfg['nlooks'] is not None:
